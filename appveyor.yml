@@ -1,8 +1,14 @@
 version: 1.0.{build}
 image: Visual Studio 2017
+platform:
+  - x86
+  - x64
+
 build_script:
 - cmd: >-
-    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
+    IF "%PLATFORM%"=="x86" call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"
+
+    IF "%PLATFORM%"=="x64" call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
 
     python configure.py --bootstrap
 
